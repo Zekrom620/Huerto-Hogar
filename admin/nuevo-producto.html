@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nuevo Producto | Huerto Hogar</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-admin.css" />
+</head>
+
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2><a href="index.html" style="color: white;">Panel Admin</a></h2>
+      <nav>
+        <ul>
+          <li><a href="usuarios.html">👤 Gestión de Usuarios</a></li>
+          <li><a href="productos.html">📦 Gestión de Productos</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+      <h1>Crear Nuevo Producto</h1>
+      <form id="formNuevoProducto" class="form-admin" novalidate>
+
+        <label for="codigo">Código Producto *</label>
+        <input type="text" id="codigo" name="codigo" required autocomplete="off"/>
+
+        <label for="nombre">Nombre *</label>
+        <input type="text" id="nombre" name="nombre" required autocomplete="off"/>
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+
+        <label for="precio">Precio *</label>
+        <input type="number" id="precio" name="precio" required min="0"/>
+
+        <label for="stock">Stock *</label>
+        <input type="number" id="stock" name="stock" required min="0"/>
+
+        <label for="stockCritico">Stock Crítico *</label>
+        <input type="number" id="stockCritico" name="stockCritico" required min="0"/>
+
+        <label for="categoria">Categorías *</label>
+        <select id="categoria" name="categoria" required>
+          <option value="">Seleccione...</option>
+          <option value="fruta">Fruta</option>
+          <option value="verdura">Verdura</option>
+          <option value="otro">Otro</option>
+        </select>
+
+        <label for="imagen">Imagen</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*"/>
+
+        <button type="submit">Crear Producto</button>
+
+        <div id="mensajeGeneral" class="mensaje-general" role="alert" aria-live="polite"></div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
