@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Usuario</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-tienda.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Huerto Hogar</div>
+    <nav class="menu" aria-label="Menú principal">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blog</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+     <div class="usuario-sesion"></div> <!-- Aquí mostraremos usuario y botón -->
+    <div class="carrito">
+      <button aria-label="Ver carrito de compras">🛒</button>
+    </div>
+  </header>
+
+  <main class="main-registro">
+    <h1>Registro de Usuario</h1>
+    <form id="formRegistro" novalidate>
+
+      <label for="run">RUN *</label>
+      <input type="text" id="run" name="run" maxlength="9" minlength="7" required autocomplete="off" />
+      <div id="error-run" class="error-text"></div>
+
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" name="nombre" maxlength="50" required autocomplete="off" />
+      <div id="error-nombre" class="error-text"></div>
+
+      <label for="apellidos">Apellidos *</label>
+      <input type="text" id="apellidos" name="apellidos" maxlength="100" required autocomplete="off" />
+      <div id="error-apellidos" class="error-text"></div>
+
+      <label for="email">Correo *</label>
+      <input type="email" id="email" name="email" maxlength="100" required autocomplete="off" />
+      <div id="error-email" class="error-text"></div>
+
+      <label for="fechaNacimiento">Fecha de nacimiento</label>
+      <input type="date" id="fechaNacimiento" name="fechaNacimiento" />
+
+      <label for="region">Región</label>
+      <select id="region" name="region"></select>
+      <div id="error-region" class="error-text"></div>
+
+      <label for="comuna">Comuna</label>
+      <select id="comuna" name="comuna"></select>
+      <div id="error-comuna" class="error-text"></div>
+
+      <label for="direccion">Dirección *</label>
+      <input type="text" id="direccion" name="direccion" maxlength="300" required autocomplete="off" />
+      <div id="error-direccion" class="error-text"></div>
+
+      <label for="password">Contraseña *</label>
+      <div class="campo-form password">
+      <input type="password" id="password" name="password" minlength="4" maxlength="10" required autocomplete="off" />
+      <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contraseña">👁</button>
+      </div>
+
+      <button type="submit">Registrarse</button>
+
+      <div id="mensajeGeneral" class="mensaje-general" role="alert" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script src="../Tienda/js/validaciones.js"></script>
+</body>
+</html>

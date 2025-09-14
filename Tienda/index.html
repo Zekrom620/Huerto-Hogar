@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet">
 
   <!-- Estilos -->
-  <link rel="stylesheet" href="../css/Home.css" />
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-tienda.css" />
 </head>
 <body>
 
@@ -16,12 +18,13 @@
   <header class="header">
     <div class="logo">Huerto Hogar</div>
     <nav class="menu">
-      <a href="Home.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="productos.html">Productos</a>
       <a href="nosotros.html">Nosotros</a>
       <a href="Blogs.html">Blog</a>
       <a href="contacto.html">Contacto</a>
     </nav>
+     <div class="usuario-sesion"></div> <!-- Aquí mostraremos usuario y botón -->
     <div class="carrito">
       <button>🛒</button>
     </div>
@@ -29,8 +32,8 @@
 
   <!-- ========== ENLACES DE USUARIO ========== -->
   <div class="usuario-links">
-    <a href="IniciarSesion.html">Iniciar Sesión</a> |
-    <a href="RegistroUsuario.html">Registrar Usuario</a>
+    <a href="iniciar-sesion.html">Iniciar Sesión</a> |
+    <a href="registro.html">Registrar Usuario</a>
   </div>
 
   <!-- ========== HERO / BANNER ========== -->
@@ -48,22 +51,22 @@
     <div class="productos-grid">
 
       <div class="producto">
-        <img src="../img/manzanas-fuji.jpg" alt="Manzanas Fuji">
-        <h3>Manzanas Fuji</h3>
+        <img src="../assets/img/manzanas-fuji.jpg" alt="Manzanas Fuji">
+        <h3><a href="detalle-producto.html?producto=FR001">Manzanas Fuji</a></h3>
         <p>$1.200 / kg</p>
         <button>Agregar al carrito</button>
       </div>
 
       <div class="producto">
-        <img src="../img/pimientos-tricolores.jpg" alt="Pimientos Tricolores">
-        <h3>Pimientos Tricolores</h3>
+        <img src="../assets/img/pimientos-tricolores.jpg" alt="Pimientos Tricolores">
+        <h3><a href="detalle-producto.html?producto=VR003">Pimientos Tricolores</a></h3>
         <p>$1.500 / kg</p>
         <button>Agregar al carrito</button>
       </div>
 
       <div class="producto">
-        <img src="../img/miel-organica.jpg" alt="Miel Orgánica">
-        <h3>Miel Orgánica</h3>
+        <img src="../assets/img/miel-organica.jpg" alt="Miel Orgánica">
+        <h3><a href="detalle-producto.html?producto=PO001">Miel Orgánica</a></h3>
         <p>$5.000 / frasco</p>
         <button>Agregar al carrito</button>
       </div>
@@ -87,13 +90,13 @@
     <div class="impacto-contenedor">
 
       <div class="impacto-item">
-        <img src="../img/huella-carbono.png" alt="Huella de carbono">
+        <img src="../assets/img/huella-carbono.png" alt="Huella de carbono">
         <h3>Huella de Carbono</h3>
         <p>Cada compra de productos locales ayuda a reducir la huella de carbono, evitando transportes innecesarios.</p>
       </div>
 
       <div class="impacto-item">
-        <img src="../img/comunidad.png" alt="Apoyo a la comunidad">
+        <img src="../assets/img/comunidad.png" alt="Apoyo a la comunidad">
         <h3>Apoyo a la Comunidad</h3>
         <p>Tu compra fortalece a agricultores locales, generando empleo y desarrollo sostenible en la región.</p>
       </div>
@@ -101,17 +104,17 @@
     </div>
   </section>
 
-<!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="footer-left">
-    <p>Posibles sitios de interés:</p>
-  </div>
-  <div class="footer-links">
-    <a href="https://uchile.cl/noticias/213699/la-importancia-de-comer-frutas-y-los-mitos-en-torno-a-su-consumo" target="_blank" rel="noopener noreferrer">Universidad de Chile: Importancia de las frutas</a> |
-    <a href="https://www.redfarma.cl/consejos/interior/con/453" target="_blank" rel="noopener noreferrer">Redfarma: Beneficios de frutas y verduras</a> |
-    <a href="https://www.biobiochile.cl/noticias/salud-y-bienestar/vida-fitness/2021/11/15/los-beneficios-que-nos-aportan-las-frutas-y-verduras-segun-su-color.shtml" target="_blank" rel="noopener noreferrer">BioBioChile: Beneficios según el color</a>
-  </div>
-</footer>
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-left">
+      <p>Posibles sitios de interés:</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://uchile.cl/noticias/213699/la-importancia-de-comer-frutas-y-los-mitos-en-torno-a-su-consumo" target="_blank" rel="noopener noreferrer">Universidad de Chile: Importancia de las frutas</a> |
+      <a href="https://www.redfarma.cl/consejos/interior/con/453" target="_blank" rel="noopener noreferrer">Redfarma: Beneficios de frutas y verduras</a> |
+      <a href="https://www.biobiochile.cl/noticias/salud-y-bienestar/vida-fitness/2021/11/15/los-beneficios-que-nos-aportan-las-frutas-y-verduras-segun-su-color.shtml" target="_blank" rel="noopener noreferrer">BioBioChile: Beneficios según el color</a>
+    </div>
+  </footer>
 
 </body>
 </html>
