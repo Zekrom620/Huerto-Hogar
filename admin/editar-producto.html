@@ -29,10 +29,10 @@
     <!-- Contenido principal -->
     <main class="contenido">
       <h1>Editar Producto</h1>
-      <form id="formEditarProducto" class="form-admin" novalidate>
+      <form id="form-editar-producto" class="form-admin" novalidate>
 
         <label for="codigo">Código Producto *</label>
-        <input type="text" id="codigo" name="codigo" required autocomplete="off"/>
+        <input type="text" id="codigo" name="codigo" required autocomplete="off" readonly/>
 
         <label for="nombre">Nombre *</label>
         <input type="text" id="nombre" name="nombre" required autocomplete="off"/>
@@ -52,19 +52,17 @@
         <label for="categoria">Categorías *</label>
         <select id="categoria" name="categoria" required>
           <option value="">Seleccione...</option>
-          <option value="fruta">Fruta</option>
-          <option value="verdura">Verdura</option>
-          <option value="otro">Otro</option>
+          <option value="Frutas">Frutas</option>
+          <option value="Verduras">Verduras</option>
+          <option value="Otros">Otros</option>
         </select>
 
-        <label for="imagen">Imagen</label>
-        <input type="file" id="imagen" name="imagen" accept="image/*"/>
-
         <button type="submit">Guardar Cambios</button>
-
         <div id="mensajeGeneral" class="mensaje-general" role="alert" aria-live="polite"></div>
       </form>
     </main>
   </div>
+
+  <script src="js/validaciones.js"></script>
 </body>
 </html>

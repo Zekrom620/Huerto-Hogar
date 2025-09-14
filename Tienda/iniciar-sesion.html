@@ -11,7 +11,6 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="css/estilos-base.css" />
   <link rel="stylesheet" href="css/estilos-tienda.css" />
-  <!-- Asumiendo que el CSS del registro es común -->
 </head>
 <body>
   <!-- HEADER -->
@@ -24,16 +23,15 @@
       <a href="blogs.html">Blog</a>
       <a href="contacto.html">Contacto</a>
     </nav>
-     <div class="usuario-sesion"></div> <!-- Aquí mostraremos usuario y botón -->
+    <div id="header-usuario"></div>
     <div class="carrito">
-      <button aria-label="Ver carrito de compras">🛒</button>
-    </div>
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
   </header>
 
   <main class="main-registro"> <!-- Reutilizando clase para estilos -->
     <h1>Inicio de Sesión</h1>
     <form id="formLogin" novalidate>
-
       <label for="emailLogin">Correo *</label>
       <input type="email" id="emailLogin" name="emailLogin" maxlength="100" required autocomplete="off" />
       <div id="error-emailLogin" class="error-text"></div>
@@ -51,6 +49,8 @@
     </form>
   </main>
 
-  <script src="../Tienda/js/validaciones.js"></script>
+  <!-- Scripts (orden correcto: usuarios primero, luego validaciones) -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
 </body>
 </html>

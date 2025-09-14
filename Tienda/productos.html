@@ -21,13 +21,13 @@
       <a href="index.html">Home</a>
       <a href="productos.html" class="activo">Productos</a>
       <a href="nosotros.html">Nosotros</a>
-      <a href="Blogs.html">Blog</a>
+      <a href="blogs.html">Blog</a>
       <a href="contacto.html">Contacto</a>
     </nav>
-    <div class="usuario-sesion"></div>
+    <div id="header-usuario"></div>
     <div class="carrito">
-      <button>🛒</button>
-    </div>
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
   </header>
 
   <!-- ========== TÍTULO DE LA PÁGINA ========== -->
@@ -39,98 +39,58 @@
   <!-- ========== LISTADO DE PRODUCTOS ========== -->
   <section class="productos-tienda">
     <div class="productos-grid">
-
-      <!-- Producto 1 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=FR001">
-          <img src="../assets/img/manzanas-fuji.jpg" alt="Manzanas Fuji">
-          <h3>Manzanas Fuji</h3>
-        </a>
-        <p class="precio">$1.200 / kg</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 2 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=FR002">
-          <img src="../assets/img/naranjas-valencia.jpg" alt="Naranjas Valencia">
-          <h3>Naranjas Valencia</h3>
-        </a>
-        <p class="precio">$1.000 / kg</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 3 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=FR003">
-          <img src="../assets/img/platanos-cavendish.jpg" alt="Plátanos Cavendish">
-          <h3>Plátanos Cavendish</h3>
-        </a>
-        <p class="precio">$800 / kg</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 4 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=VR001">
-          <img src="../assets/img/zanahorias-organicas.jpg" alt="Zanahorias Orgánicas">
-          <h3>Zanahorias Orgánicas</h3>
-        </a>
-        <p class="precio">$900 / kg</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 5 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=VR002">
-          <img src="../assets/img/espinacas.jpg" alt="Espinacas Frescas">
-          <h3>Espinacas Frescas</h3>
-        </a>
-        <p class="precio">$700 / bolsa 500g</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 6 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=VR003">
-          <img src="../assets/img/pimientos-tricolores.jpg" alt="Pimientos Tricolores">
-          <h3>Pimientos Tricolores</h3>
-        </a>
-        <p class="precio">$1.500 / kg</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 7 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=PO001">
-          <img src="../assets/img/miel-organica.jpg" alt="Miel Orgánica">
-          <h3>Miel Orgánica</h3>
-        </a>
-        <p class="precio">$5.000 / frasco</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 8 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=PO003">
-          <img src="../assets/img/quinua-organica.jpg" alt="Quinua Orgánica">
-          <h3>Quinua Orgánica</h3>
-        </a>
-        <p class="precio">$3.000 / bolsa</p>
-        <button>Añadir al carrito</button>
-      </div>
-
-      <!-- Producto 9 -->
-      <div class="producto">
-        <a href="detalle-producto.html?producto=PL001">
-          <img src="../assets/img/leche-entera.jpg" alt="Leche Entera">
-          <h3>Leche Entera</h3>
-        </a>
-        <p class="precio">$1.200 / litro</p>
-        <button>Añadir al carrito</button>
-      </div>
-
+      <!-- Aquí se cargarán dinámicamente los productos -->
     </div>
   </section>
+
+  <!-- Scripts -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
+  <script src="js/carrito.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const contenedor = document.querySelector(".productos-grid");
+      contenedor.innerHTML = "";
+
+      // Categorías en orden
+      const categorias = [
+        "Frutas Frescas",
+        "Verduras Orgánicas",
+        "Productos Orgánicos",
+        "Productos Lácteos"
+      ];
+
+      categorias.forEach(cat => {
+        // Título de categoría
+        const titulo = document.createElement("h2");
+        titulo.textContent = cat;
+        contenedor.appendChild(titulo);
+
+        // Productos de esa categoría
+        const productosCat = productos.filter(p => p.categoria === cat);
+
+        productosCat.forEach(prod => {
+          const div = document.createElement("div");
+          div.classList.add("producto");
+
+          div.innerHTML = `
+            <a href="detalle-producto.html?producto=${prod.id}">
+              <img src="${prod.imagen}" alt="${prod.nombre}">
+              <h3>${prod.nombre}</h3>
+            </a>
+            <p class="precio">$${prod.precio.toLocaleString()} / ${prod.unidad}</p>
+            <button>Añadir al carrito</button>
+          `;
+
+          // 🔹 Conectar botón al carrito
+          div.querySelector("button").addEventListener("click", () => {
+            agregarAlCarrito(prod);
+          });
+
+          contenedor.appendChild(div);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

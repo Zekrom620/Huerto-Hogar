@@ -23,10 +23,10 @@
       <a href="blogs.html">Blog</a>
       <a href="contacto.html">Contacto</a>
     </nav>
-     <div class="usuario-sesion"></div> <!-- Aquí mostraremos usuario y botón -->
+    <div id="header-usuario"></div>
     <div class="carrito">
-      <button aria-label="Ver carrito de compras">🛒</button>
-    </div>
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
   </header>
 
   <main class="main-registro">
@@ -53,11 +53,11 @@
       <input type="date" id="fechaNacimiento" name="fechaNacimiento" />
 
       <label for="region">Región</label>
-      <select id="region" name="region"></select>
+      <select id="region" name="region" required></select>
       <div id="error-region" class="error-text"></div>
 
       <label for="comuna">Comuna</label>
-      <select id="comuna" name="comuna"></select>
+      <select id="comuna" name="comuna" required></select>
       <div id="error-comuna" class="error-text"></div>
 
       <label for="direccion">Dirección *</label>
@@ -66,9 +66,10 @@
 
       <label for="password">Contraseña *</label>
       <div class="campo-form password">
-      <input type="password" id="password" name="password" minlength="4" maxlength="10" required autocomplete="off" />
-      <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contraseña">👁</button>
+        <input type="password" id="password" name="password" minlength="4" maxlength="10" required autocomplete="off" />
+        <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contraseña">👁</button>
       </div>
+      <div id="error-password" class="error-text"></div>
 
       <button type="submit">Registrarse</button>
 
@@ -76,6 +77,66 @@
     </form>
   </main>
 
-  <script src="../Tienda/js/validaciones.js"></script>
+  <!-- Scripts -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
+
+  <!-- Script regiones/comunas (simple, según lo solicitado) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const regionesYcomunas = {
+        "Región Metropolitana": ["Santiago", "Puente Alto", "Las Condes"],
+        "Valparaíso": ["Viña del Mar", "Valparaíso", "Quilpué"],
+        "O'Higgins": ["Rancagua", "San Fernando", "Machalí"]
+      };
+
+      const regionSelect = document.getElementById("region");
+      const comunaSelect = document.getElementById("comuna");
+
+      // placeholder para region
+      const placeholderRegion = document.createElement("option");
+      placeholderRegion.value = "";
+      placeholderRegion.textContent = "Seleccione...";
+      placeholderRegion.disabled = true;
+      placeholderRegion.selected = true;
+      regionSelect.appendChild(placeholderRegion);
+
+      // Cargar regiones
+      Object.keys(regionesYcomunas).forEach(region => {
+        const option = document.createElement("option");
+        option.value = region;
+        option.textContent = region;
+        regionSelect.appendChild(option);
+      });
+
+      // placeholder inicial para comuna
+      comunaSelect.innerHTML = "";
+      const placeholderComunaInit = document.createElement("option");
+      placeholderComunaInit.value = "";
+      placeholderComunaInit.textContent = "Seleccione región primero";
+      placeholderComunaInit.disabled = true;
+      placeholderComunaInit.selected = true;
+      comunaSelect.appendChild(placeholderComunaInit);
+
+      // Cuando cambia la región, cargar comunas
+      regionSelect.addEventListener("change", () => {
+        comunaSelect.innerHTML = ""; // limpiar
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Seleccione...";
+        placeholder.disabled = true;
+        placeholder.selected = true;
+        comunaSelect.appendChild(placeholder);
+
+        const comunas = regionesYcomunas[regionSelect.value] || [];
+        comunas.forEach(c => {
+          const option = document.createElement("option");
+          option.value = c;
+          option.textContent = c;
+          comunaSelect.appendChild(option);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

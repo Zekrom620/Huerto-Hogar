@@ -24,35 +24,59 @@
       <a href="blogs.html">Blog</a>
       <a href="contacto.html">Contacto</a>
     </nav>
-    <div class="usuario-sesion"></div>
+    <div id="header-usuario"></div>
     <div class="carrito">
-      <button>🛒</button>
-    </div>
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
   </header>
 
   <!-- ========== DETALLE PRODUCTO ========== -->
   <section class="detalle-producto">
-    <div class="imagen-producto">
-      <img src="../assets/img/manzanas-fuji.jpg" alt="Manzanas Fuji" />
-    </div>
+    <!-- Aquí se renderiza dinámicamente el producto -->
+  </section>
 
-    <div class="info-producto">
-      <h1>Manzanas Fuji</h1>
-      <p class="descripcion">
-        Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule. Perfectas para meriendas saludables o como ingrediente en postres.
-      </p>
-      <p class="precio">$1.200 CLP por kilo</p>
-      <p class="stock">Stock disponible: 150 kilos</p>
+  <!-- Scripts -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
+  <script src="js/carrito.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const idProducto = params.get("producto"); // 🔹 ahora es string
 
-      <div class="cantidad-agregar">
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" min="1" value="1" />
-        <span class="unidad">kilos</span>
+    const producto = productos.find(p => p.id === idProducto);
+    if (!producto) return;
+
+    const seccion = document.querySelector(".detalle-producto");
+    seccion.innerHTML = `
+      <div class="imagen-producto">
+        <img src="${producto.imagen}" alt="${producto.nombre}" />
       </div>
 
-      <button class="btn-agregar">Agregar al carrito</button>
-    </div>
-  </section>
+      <div class="info-producto">
+        <h1>${producto.nombre}</h1>
+        <p class="descripcion">${producto.descripcion}</p>
+        <p class="precio">$${producto.precio.toLocaleString()} CLP por ${producto.unidad}</p>
+        <p class="stock">Stock disponible: ${producto.stock} ${producto.unidad}</p>
+
+        <div class="cantidad-agregar">
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" id="cantidad" name="cantidad" min="1" value="1" />
+          <span class="unidad">${producto.unidad}</span>
+        </div>
+
+        <button class="btn-agregar">Agregar al carrito</button>
+      </div>
+    `;
+
+    // 🔹 Conectar el botón al carrito
+    const btnAgregar = seccion.querySelector(".btn-agregar");
+    btnAgregar.addEventListener("click", () => {
+      const cantidad = parseInt(document.getElementById("cantidad").value) || 1;
+      agregarAlCarrito({ ...producto, cantidad });
+    });
+  });
+</script>
 
 </body>
 </html>
