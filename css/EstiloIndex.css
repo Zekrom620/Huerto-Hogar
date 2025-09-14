@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #808080; /* gris */
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  /* logo a la izquierda */
+  .logo {
+    order: 1;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* menú en el centro */
+  .menu {
+    order: 2;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+  }
+  
+  .menu a:hover {
+    text-decoration: underline;
+  }
+  
+  /* carrito a la derecha */
+  .carrito {
+    order: 3;
+  }
+  
+  .carrito button {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .carrito button:hover {
+    background-color: #c0392b;
+  }
