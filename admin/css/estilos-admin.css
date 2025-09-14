@@ -1,0 +1,91 @@
+/* ============================
+   ESTILOS PARA INDEX
+   ============================ */
+
+/* ====== CONTENEDOR GENERAL ====== */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* ====== SIDEBAR (MENÚ LATERAL) ====== */
+  .sidebar {
+    width: 250px;
+    background-color: #2c5d3f;
+    color: white;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  }
+  
+  .sidebar h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar nav li {
+    margin: 1rem 0;
+  }
+  
+  .sidebar nav a {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: block;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar nav a:hover {
+    background-color: #3c7d56;
+  }
+  
+  /* ====== CONTENIDO PRINCIPAL ====== */
+  .contenido {
+    flex-grow: 1;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .contenido h1 {
+    font-size: 2rem;
+    color: #2c5d3f;
+    margin-bottom: 1rem;
+  }
+  
+  .contenido p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+  
+  .img-admin {
+    max-width: 400px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 768px) {
+    .admin-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .contenido {
+      padding: 2rem 1rem;
+    }
+  }
