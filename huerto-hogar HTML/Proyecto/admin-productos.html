@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuertoHogar | Administración de Productos (Cosecha)</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="body">
+        <aside class="barra">
+            <div class="nombre">HuertoHogar - Administración</div>
+            <nav>
+                <a href="admin-index.html">Panel Principal</a>
+                <a href="admin-productos.html" class="active">Productos (Cosecha)</a>
+                <a href="admin-usuarios.html">Usuarios</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <h1>Gestión de la Cosecha</h1>
+                <a href="admin-producto-nuevo.html" class="btn">+ Agregar Producto Fresco</a>
+            </header>
+
+            <section class="tabla-contenido">
+                <table class="tabla-admin">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre del Producto</th>
+                            <th>Precio (CLP)</th>
+                            <th>Stock (Unid./Kg)</th>
+                            <th>Origen</th> <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FR001</td>
+                            <td>Manzanas Fuji</td>
+                            <td>$1.200/Kg</td>
+                            <td>150</td>
+                            <td>Valle del Maule</td>
+                            <td>
+                                <a href="admin-producto-editar.html?id=FR001" class="btn-small">Editar</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>VR001</td>
+                            <td>Zanahorias Orgánicas</td>
+                            <td>$900/Kg</td>
+                            <td>100</td>
+                            <td>Región de O'Higgins</td>
+                            <td>
+                                <a href="admin-producto-editar.html?id=VR001" class="btn-small">Editar</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>HuertoHogar • Gestión del Campo y Sostenibilidad</p>
+    </footer>
+</body>
+</html>

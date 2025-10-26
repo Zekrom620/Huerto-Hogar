@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - HuertoHogar</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div>
+                <img src="img/Logo.png" alt="Logo HuertoHogar" width="40">
+                <span>HuertoHogar</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="productos.html">Productos</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="blogs.html">Blog & Tips</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <div class="acciones">
+                <a href="login.html">Iniciar sesión</a> |
+                <a href="registro.html">Registrar usuario</a> |
+                <a href="carrito.html" class="carrito">Carrito 0</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="detalle-container">
+            <img id="detalle-img" src="" alt="Imagen del producto fresco">
+            <div class="info-producto">
+                <h2>
+                    <span id="detalle-nombre"></span>
+                    <span id="detalle-precio"></span>
+                </h2>
+                <hr>
+                
+                <p style="font-weight: bold; color: var(--color-marron-titulo, #8B4513);">
+                    <span id="detalle-origen">Origen: Local</span> 
+                </p>
+                <hr>
+
+                <h3>Descripción del Producto:</h3>
+                <p id="detalle-descripcion" class="descripcion"></p>
+                
+                <p style="margin-top: 15px; color: var(--color-texto-secundario);">
+                    *Consejo HuertoHogar: Revisa la sección de blogs para ideas de recetas.
+                </p>
+                <hr>
+                
+                <div class="cantidad-agregar">
+                    <input type="number" id="cantidad-producto" value="1" min="1" max="99">
+                    <button class="agregar-carrito">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <h3>Otros Productos de la Cosecha</h3>
+        <div class="recomendaciones-detalle"></div>
+    </main>
+
+    <footer>
+        <p>HuertoHogar • Frescura y Calidad Directa del Campo • Chile</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Estas funciones aseguran que se cargue la data, el carrito y las recomendaciones
+            renderDetallePage(); 
+            renderRecomendacionesAleatorias('.recomendaciones-detalle', 5);
+            actualizarContadorCarrito();
+            actualizarHeader();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuertoHogar | Editar Cosecha</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="body">
+        <aside class="barra">
+            <div class="nombre">HuertoHogar - Administración</div>
+            <nav>
+                <a href="admin-index.html">Panel Principal</a>
+                <a href="admin-productos.html" class="active">Productos (Cosecha)</a>
+                <a href="admin-usuarios.html">Usuarios</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <h1>Editar Producto de la Cosecha</h1>
+            </header>
+
+            <form id="formProductoEditar" class="formulario">
+                <label>Código Producto (ID):</label>
+                <input type="text" name="codigo" value="FR001" required minlength="3" readonly> 
+
+                <label>Nombre:</label>
+                <input type="text" name="nombre" value="Manzanas Fuji" required maxlength="100">
+
+                <label>Origen del Producto:</label>
+                <input type="text" name="origen" value="Valle del Maule" required maxlength="100">
+
+                <label>Descripción:</label>
+                <textarea name="descripcion" maxlength="500">Manzanas Fuji crujientes y dulces, cultivadas en el Valle del Maule.</textarea>
+
+                <label>Precio (CLP):</label>
+                <input type="number" name="precio" value="1200" min="0" step="100" required>
+
+                <label>Stock (Unidades/Kilos):</label>
+                <input type="number" name="stock" value="150" min="0" required>
+
+                <label>Stock Crítico:</label>
+                <input type="number" name="stockCritico" value="20" min="0">
+
+                <label>Categoría:</label>
+                <select name="categoria" required>
+                    <option value="">Seleccione...</option>
+                    <option value="frutas-frescas" selected>Frutas Frescas</option>
+                    <option value="verduras-organicas">Verduras Orgánicas</option>
+                    <option value="productos-organicos">Productos Orgánicos</option>
+                    <option value="lacteos">Productos Lácteos</option>
+                </select>
+
+                <label>Imagen:</label>
+                <input type="file" name="imagen" accept="image/*">
+
+                <button type="submit" class="btn">Actualizar Cosecha</button>
+            </form>
+        </main>
+    </div>
+
+    <footer>
+        <p>HuertoHogar • Gestión del Campo y Sostenibilidad</p>
+    </footer>
+    
+    <script src="js/admin.js"></script>
+</body>
+</html>
