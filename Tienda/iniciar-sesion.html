@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio de Sesión</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-tienda.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Huerto Hogar</div>
+    <nav class="menu" aria-label="Menú principal">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blog</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div id="header-usuario"></div>
+    <div class="carrito">
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
+  </header>
+
+  <main class="main-registro"> <!-- Reutilizando clase para estilos -->
+    <h1>Inicio de Sesión</h1>
+    <form id="formLogin" novalidate>
+      <label for="emailLogin">Correo *</label>
+      <input type="email" id="emailLogin" name="emailLogin" maxlength="100" required autocomplete="off" />
+      <div id="error-emailLogin" class="error-text"></div>
+
+      <label for="passwordLogin">Contraseña *</label>
+      <div class="campo-form password">
+        <input type="password" id="passwordLogin" name="passwordLogin" minlength="4" maxlength="10" required autocomplete="off" />
+        <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contraseña">👁</button>
+      </div>
+      <div id="error-passwordLogin" class="error-text"></div>
+
+      <button type="submit">Iniciar Sesión</button>
+
+      <div id="mensajeGeneralLogin" class="mensaje-general" role="alert" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <!-- Scripts (orden correcto: usuarios primero, luego validaciones) -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
+</body>
+</html>

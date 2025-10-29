@@ -1,0 +1,162 @@
+/* Importación de la fuente principal de HuertoHogar */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Paleta de colores para el Administrador */
+:root {
+    --color-barra-principal: #2E8B57; /* Verde Esmeralda */
+    --color-barra-hover: #246a44; /* Verde más oscuro */
+    --color-titulo: #8B4513; /* Marrón Claro */
+    --color-fondo-principal: #F7F7F7; /* Blanco Suave */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-fondo-principal);
+    color: #333;
+}
+
+.body {
+    display: flex;
+    min-height: 100vh; /* Se corrige a vh (viewport height) para que ocupe toda la pantalla */
+}
+
+/* Barra Lateral: Verde Esmeralda */
+.barra {
+    background: var(--color-barra-principal);
+    color: #fff;
+    padding: 20px;
+    flex-direction: column;
+    width: 200px; /* Se añade ancho para layout, aunque se puede ajustar */
+}
+
+.barra .nombre {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.barra nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.barra nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 10px;
+}
+
+/* Hover y Activo: Verde más oscuro */
+.barra nav a:hover,
+.barra nav a.active {
+    background: var(--color-barra-hover);
+    border-radius: 4px;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Encabezados y Títulos: Marrón Claro (rústico) */
+.header h1 {
+    color: var(--color-titulo);
+}
+
+.info {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Botones: Verde Esmeralda */
+.info .btn {
+    background: var(--color-barra-principal);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px;
+    display: inline-block; /* Para que funcione padding en <a> */
+}
+
+/* Botones Hover: Verde más oscuro */
+.info .btn:hover {
+    background: var(--color-barra-hover);
+}
+
+/* Estilos de Formularios (para agregar/editar) */
+form {
+    background: #fff;
+    padding: 20px;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95em;
+    box-sizing: border-box; /* Asegura que el padding no cambie el ancho */
+}
+
+/* Botón de Submit en Formulario: Verde Esmeralda */
+form .btn {
+    background: var(--color-barra-principal);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Botón de Submit Hover: Verde más oscuro */
+form .btn:hover {
+    background: var(--color-barra-hover);
+}
+
+/* Footer: Verde Esmeralda */
+footer {
+    background-color: var(--color-barra-principal);
+    color: white;
+    text-align: center;
+    position: relative; /* Cambiado a relative o quitado fixed si se usa 100vh en .body */
+    padding: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilos de Tablas para Listados */
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-admin th, .tabla-admin td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla-admin th {
+    background-color: var(--color-titulo); /* Marrón para encabezados de tabla */
+    color: white;
+}

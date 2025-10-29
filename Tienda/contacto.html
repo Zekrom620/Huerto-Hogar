@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - Huerto Hogar</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-tienda.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Huerto Hogar</div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blog</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div id="header-usuario"></div>
+      <div class="carrito">
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
+  </header>
+
+  <!-- FORMULARIO DE CONTACTO -->
+  <section class="contacto">
+    <img src="../assets/img/contacto.jpg" alt="Contacto" class="contacto-imagen" />
+
+    <div class="formulario-contacto">
+      <h2>Formulario de contacto</h2>
+      <form id="formContacto" novalidate>
+        <label for="nombre">Nombre completo *</label>
+        <input type="text" id="nombre" name="nombre" maxlength="100" required autocomplete="off" />
+        <small id="error-nombre" class="mensaje-error"></small>
+
+        <label for="correo">Correo electrónico *</label>
+        <input type="email" id="correo" name="correo" maxlength="100" required autocomplete="off" />
+        <small class="mensaje-ayuda">Debe ser un correo (@duoc.cl, @profesor.duoc.cl, @gmail.com)</small>
+        <small id="error-correo" class="mensaje-error"></small>
+
+        <label for="comentario">Comentario *</label>
+        <textarea id="comentario" name="comentario" maxlength="500" required></textarea>
+        <small id="error-comentario" class="mensaje-error"></small>
+
+        <button type="submit">Enviar mensaje</button>
+
+        <!-- Mensajes dinámicos -->
+        <div class="mensajes" role="alert" aria-live="polite">
+          <span id="mensajeError" class="mensaje-error"></span>
+          <span id="mensajeExito" class="mensaje-exito"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+    <!-- Scripts -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
+</body>
+</html>

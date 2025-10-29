@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Usuario</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-tienda.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Huerto Hogar</div>
+    <nav class="menu" aria-label="Menú principal">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blog</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div id="header-usuario"></div>
+    <div class="carrito">
+  <a href="carrito.html">🛒 <span id="contador-carrito">0</span></a>
+</div>
+  </header>
+
+  <main class="main-registro">
+    <h1>Registro de Usuario</h1>
+    <form id="formRegistro" novalidate>
+
+      <label for="run">RUN *</label>
+      <input type="text" id="run" name="run" maxlength="9" minlength="7" required autocomplete="off" />
+      <div id="error-run" class="error-text"></div>
+
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" name="nombre" maxlength="50" required autocomplete="off" />
+      <div id="error-nombre" class="error-text"></div>
+
+      <label for="apellidos">Apellidos *</label>
+      <input type="text" id="apellidos" name="apellidos" maxlength="100" required autocomplete="off" />
+      <div id="error-apellidos" class="error-text"></div>
+
+      <label for="email">Correo *</label>
+      <input type="email" id="email" name="email" maxlength="100" required autocomplete="off" />
+      <div id="error-email" class="error-text"></div>
+
+      <label for="fechaNacimiento">Fecha de nacimiento</label>
+      <input type="date" id="fechaNacimiento" name="fechaNacimiento" />
+
+      <label for="region">Región</label>
+      <select id="region" name="region" required></select>
+      <div id="error-region" class="error-text"></div>
+
+      <label for="comuna">Comuna</label>
+      <select id="comuna" name="comuna" required></select>
+      <div id="error-comuna" class="error-text"></div>
+
+      <label for="direccion">Dirección *</label>
+      <input type="text" id="direccion" name="direccion" maxlength="300" required autocomplete="off" />
+      <div id="error-direccion" class="error-text"></div>
+
+      <label for="password">Contraseña *</label>
+      <div class="campo-form password">
+        <input type="password" id="password" name="password" minlength="4" maxlength="10" required autocomplete="off" />
+        <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contraseña">👁</button>
+      </div>
+      <div id="error-password" class="error-text"></div>
+
+      <button type="submit">Registrarse</button>
+
+      <div id="mensajeGeneral" class="mensaje-general" role="alert" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/usuarios.js"></script>
+  <script src="js/validaciones.js"></script>
+
+  <!-- Script regiones/comunas (simple, según lo solicitado) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const regionesYcomunas = {
+        "Región Metropolitana": ["Santiago", "Puente Alto", "Las Condes"],
+        "Valparaíso": ["Viña del Mar", "Valparaíso", "Quilpué"],
+        "O'Higgins": ["Rancagua", "San Fernando", "Machalí"]
+      };
+
+      const regionSelect = document.getElementById("region");
+      const comunaSelect = document.getElementById("comuna");
+
+      // placeholder para region
+      const placeholderRegion = document.createElement("option");
+      placeholderRegion.value = "";
+      placeholderRegion.textContent = "Seleccione...";
+      placeholderRegion.disabled = true;
+      placeholderRegion.selected = true;
+      regionSelect.appendChild(placeholderRegion);
+
+      // Cargar regiones
+      Object.keys(regionesYcomunas).forEach(region => {
+        const option = document.createElement("option");
+        option.value = region;
+        option.textContent = region;
+        regionSelect.appendChild(option);
+      });
+
+      // placeholder inicial para comuna
+      comunaSelect.innerHTML = "";
+      const placeholderComunaInit = document.createElement("option");
+      placeholderComunaInit.value = "";
+      placeholderComunaInit.textContent = "Seleccione región primero";
+      placeholderComunaInit.disabled = true;
+      placeholderComunaInit.selected = true;
+      comunaSelect.appendChild(placeholderComunaInit);
+
+      // Cuando cambia la región, cargar comunas
+      regionSelect.addEventListener("change", () => {
+        comunaSelect.innerHTML = ""; // limpiar
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Seleccione...";
+        placeholder.disabled = true;
+        placeholder.selected = true;
+        comunaSelect.appendChild(placeholder);
+
+        const comunas = regionesYcomunas[regionSelect.value] || [];
+        comunas.forEach(c => {
+          const option = document.createElement("option");
+          option.value = c;
+          option.textContent = c;
+          comunaSelect.appendChild(option);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

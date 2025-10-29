@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mostrar Usuarios | Huerto Hogar</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos-base.css" />
+  <link rel="stylesheet" href="css/estilos-admin.css" />
+</head>
+
+<body>
+  <div class="admin-container">
+    <!-- Menú lateral -->
+    <aside class="sidebar">
+      <h2><a href="index.html" style="color: white;">Panel Admin</a></h2>
+      <nav>
+        <ul>
+          <li><a href="usuarios.html">👤 Gestión de Usuarios</a></li>
+          <li><a href="productos.html">📦 Gestión de Productos</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="contenido">
+      <h1>Usuarios Registrados</h1>
+      <p>Aquí aparecerá la lista de usuarios guardados en el sistema.</p>
+
+      <table class="tabla-admin">
+        <thead>
+          <tr>
+            <th>RUN</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Fecha Nacimiento</th>
+            <th>Tipo de Usuario</th>
+            <th>Región</th>
+            <th>Comuna</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="10">No hay usuarios registrados aún.</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+  <script src="js/validaciones.js"></script>
+</body>
+</html>
