@@ -1,0 +1,223 @@
+/* Importación de la fuente principal de HuertoHogar */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Paleta de colores para el Administrador */
+:root {
+    --color-barra-principal: #2E8B57; /* Verde Esmeralda */
+    --color-barra-hover: #246a44; /* Verde más oscuro */
+    --color-titulo: #8B4513; /* Marrón Claro */
+    --color-fondo-principal: #F7F7F7; /* Blanco Suave */
+}
+
+/* --- RESET TOTAL DEL HEADER (CRÍTICO) --- */
+/* Esto anula los estilos del "estilo.css" público para que no salga la barra verde */
+header {
+    position: static !important;      /* Ya no es fija */
+    background-color: transparent !important; /* Sin fondo verde */
+    color: inherit !important;        /* Color de texto normal */
+    padding: 0 !important;            /* Sin relleno extra */
+    box-shadow: none !important;      /* Sin sombras */
+    width: auto !important;
+    height: auto !important;
+    z-index: auto !important;
+    display: block !important;        /* Asegura que se comporte como bloque normal */
+}
+/* ---------------------------------------- */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-fondo-principal);
+    color: #333;
+    margin: 0;
+}
+
+.body {
+    display: flex;
+    min-height: 100vh; 
+}
+
+/* Barra Lateral: Verde Esmeralda */
+.barra {
+    background: var(--color-barra-principal);
+    color: #fff;
+    padding: 20px;
+    display: flex; 
+    flex-direction: column;
+    width: 240px; 
+    flex-shrink: 0; 
+}
+
+.barra .nombre {
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.barra nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.barra nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Hover y Activo: Verde más oscuro */
+.barra nav a:hover,
+.barra nav a.active {
+    background: var(--color-barra-hover);
+    border-radius: 4px;
+    padding-left: 15px; 
+}
+
+.main {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; 
+}
+
+/* --- ESTILOS LOCALES DEL HEADER DE ADMIN --- */
+/* Esto controla solo el Título y el Botón de Agregar dentro del panel */
+.header {
+    display: flex;              
+    justify-content: space-between; 
+    align-items: center;       
+    margin-bottom: 20px;        
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0; 
+}
+
+.header h1 {
+    color: var(--color-titulo);
+    font-size: 1.5rem;          
+    margin: 0;                  
+    font-family: 'Playfair Display', serif; /* Mantenemos tu fuente de títulos */
+}
+/* -------------------------------------------- */
+
+.info {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Botones Generales */
+.btn, .info .btn {
+    background: var(--color-barra-principal);
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px; 
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+/* Botones Pequeños (Para la tabla) */
+.btn-small {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn-delete {
+    background-color: #dc3545; 
+}
+
+.btn:hover, .btn-small:hover {
+    opacity: 0.9;
+}
+
+/* Estilos de Formularios */
+form {
+    background: #fff;
+    padding: 25px;
+    max-width: 700px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin: 0 auto; 
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95em;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--color-barra-principal);
+    outline: none;
+}
+
+/* Footer: Verde Esmeralda */
+footer {
+    background-color: var(--color-barra-principal);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: auto; 
+    position: static !important; /* Aseguramos que no tape nada en admin */
+}
+
+/* Estilos de Tablas para Listados */
+.tabla-contenido {
+    overflow-x: auto; 
+}
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.tabla-admin th, .tabla-admin td {
+    border-bottom: 1px solid #eee;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.tabla-admin th {
+    background-color: var(--color-titulo);
+    color: white;
+    font-weight: 600;
+}
+
+.tabla-admin tr:hover {
+    background-color: #f9f9f9;
+}
