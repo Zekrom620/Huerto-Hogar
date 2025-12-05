@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products") // Esta será la dirección web de tus productos
-@CrossOrigin(origins = "http://localhost:3000") // IMPORTANTE: Permite que tu React entre aquí sin bloqueo
+// @CrossOrigin(origins = "http://localhost:3000") <-- LÍNEA ELIMINADA
 public class ProductController {
 
     @Autowired

@@ -35,8 +35,8 @@ const ProductDetail = () => {
 
         if (foundProduct) {
             setProduct(foundProduct);
-            // Generamos recomendaciones usando la lista real
-            setRecommendations(getProductRecommendations(productos, foundProduct.id, 5)); 
+            // CRÍTICO: ELIMINAMOS la generación de recomendaciones (pero mantenemos el estado vacío)
+            // setRecommendations(getProductRecommendations(productos, foundProduct.id, 5)); 
             setQuantity(1); 
             setLoading(false);
         } else {
@@ -60,7 +60,7 @@ const ProductDetail = () => {
     return (
         <main>
             <div className="detalle-container">
-                {/* Imagen (Asegúrate que la ruta en BD empiece con /img/... o ajusta aquí) */}
+                {/* Imagen (Mantenemos tu ruta original para no romperla) */}
                 <img id="detalle-img" src={`/${product.imagen}`} alt={product.nombre} /> 
 
                 <div className="info-producto">
@@ -102,14 +102,8 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            {recommendations.length > 0 && (
-                <>
-                    <h3>Otros Productos de la Cosecha</h3>
-                    <div className="recomendaciones-detalle catalogo">
-                        <ProductsGrid products={recommendations} />
-                    </div>
-                </>
-            )}
+            {/* BLOQUE DE RECOMENDACIONES ELIMINADO */}
+
         </main>
     );
 }

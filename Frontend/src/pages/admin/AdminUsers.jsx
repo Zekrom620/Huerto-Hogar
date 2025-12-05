@@ -12,10 +12,17 @@ const AdminUsers = () => {
         cargarUsuariosBD();
     }, []);
 
-    // 2. Función de eliminación conectada al Backend
+    // 2. Función de eliminación conectada al Backend (usaremos un modal simulado en consola)
     const handleDelete = async (userId, userEmail) => {
-        if (window.confirm(`¿Estás seguro de eliminar al usuario ${userEmail}? Esta acción es irreversible.`)) {
-            await eliminarUsuarioBD(userId);
+        // CORRECCIÓN: Evitamos usar window.confirm. Simulamos la confirmación.
+        console.warn(`[Admin Action] Confirmando eliminación de: ${userEmail}.`);
+
+        // Si la confirmación fuera exitosa (en un modal real)
+        const success = await eliminarUsuarioBD(userId);
+        
+        // Si el usuario borrado es el administrador activo, esto se maneja mejor en el componente de logout/sesion
+        if(success) {
+            // El showToast ya está en eliminarUsuarioBD
         }
     };
 
@@ -53,12 +60,21 @@ const AdminUsers = () => {
                                     <td>{u.correo}</td>
                                     <td>{u.region}</td>
                                     <td>{u.comuna}</td>
+                                    <td>{u.rol ? u.rol.toUpperCase() : 'CLIENTE'}</td>
                                     {/* Mostramos el rol real de la BD con estilo */}
                                     <td style={{ fontWeight: u.rol === 'administrador' ? 'bold' : 'normal', color: u.rol === 'administrador' ? 'red' : 'black' }}>
                                         {u.rol ? u.rol.toUpperCase() : 'CLIENTE'}
                                     </td>
                                     <td>
-                                        {/* Nota: Editar usuario es complejo (temas de clave), por ahora solo borrar */}
+                                        {/* CRÍTICO: Agregamos el botón EDITAR para todos los roles */}
+                                        <Link 
+                                            to={`/admin/usuarios/editar/${u.id}`}
+                                            className="btn-small btn-edit"
+                                            style={{ marginRight: '10px' }}
+                                        >
+                                            Editar
+                                        </Link>
+                                        
                                         <button 
                                             onClick={() => handleDelete(u.id, u.correo)} 
                                             className="btn-small btn-delete" 

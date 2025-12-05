@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2025 a las 04:21:29
+-- Tiempo de generación: 03-12-2025 a las 05:44:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,43 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `huerto_hogar`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `boletas`
+--
+
+CREATE TABLE `boletas` (
+  `id` bigint(20) NOT NULL,
+  `detalle_productos` varchar(5000) DEFAULT NULL,
+  `estado` varchar(255) NOT NULL,
+  `fecha_compra` datetime(6) NOT NULL,
+  `total` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `boletas`
+--
+
+INSERT INTO `boletas` (`id`, `detalle_productos`, `estado`, `fecha_compra`, `total`, `user_id`) VALUES
+(1, '[{\"id\":1,\"nombre\":\"Manzanas Fuji\",\"precio\":1200,\"imagen\":\"img/Manzanas Fuji.jpg\",\"qty\":3},{\"id\":3,\"nombre\":\"Plátanos Cavendish\",\"precio\":800,\"imagen\":\"img/Plátanos Cavendish.jpg\",\"qty\":4}]', 'Pendiente', '2025-12-03 01:30:36.000000', 6120, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contactos`
+--
+
+CREATE TABLE `contactos` (
+  `id` bigint(20) NOT NULL,
+  `asunto` varchar(255) NOT NULL,
+  `correo` varchar(255) NOT NULL,
+  `fecha_envio` datetime(6) DEFAULT NULL,
+  `mensaje` varchar(1000) DEFAULT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -67,19 +104,35 @@ CREATE TABLE `users` (
   `correo` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `region` varchar(255) NOT NULL,
-  `rol` varchar(255) DEFAULT NULL
+  `rol` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `rut` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `comuna`, `contrasena`, `correo`, `nombre`, `region`, `rol`) VALUES
-(1, 'Providencia', 'admin123', 'mauricio@profesor.duoc.cl', 'Mauricio González', 'Santiago', 'administrador');
+INSERT INTO `users` (`id`, `comuna`, `contrasena`, `correo`, `nombre`, `region`, `rol`, `direccion`, `rut`) VALUES
+(1, 'Providencia', '$2a$10$seo8wEgBaB0D04X7iGyz/uJ/.jdRPiG0ndoIjgwo6GdTUZxqn0WvO', 'mauricio@profesor.duoc.cl', 'Mauricio González', 'Santiago', 'administrador', NULL, ''),
+(3, 'Santiago', '$2a$10$zVKbBMiraY8CHyp.NRiEPONto/qB8LQ8IYYMGsQSTmSEi90wLhM7W', 'sergio@gmail.com', 'sergio', 'Santiago', 'cliente', NULL, ''),
+(5, 'Santiago', '$2a$10$AbPfntX2B1c9c3cFD9hhguELiCMdAH9vumUg4vG4qthzme.co8Yzy', 'suazo@gmail.com', 'pele suazo', 'Santiago', 'cliente', 'el roble 500', '15873489-4');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `boletas`
+--
+ALTER TABLE `boletas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `contactos`
+--
+ALTER TABLE `contactos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `products`
@@ -100,6 +153,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `boletas`
+--
+ALTER TABLE `boletas`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `contactos`
+--
+ALTER TABLE `contactos`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
@@ -109,7 +174,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

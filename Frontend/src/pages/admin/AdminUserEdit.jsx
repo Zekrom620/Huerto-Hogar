@@ -13,29 +13,30 @@ const COMUNAS_POR_REGION = {
     "Concepción / Nacimiento": ["Concepción", "San Pedro de la Paz", "Talcahuano", "Nacimiento", "Los Ángeles"],
     "Puerto Montt / Villarica": ["Puerto Montt", "Puerto Varas", "Villarrica", "Pucón", "Osorno"]
 };
-const ROLES = ["administrador", "cliente", "repartidor"];
+// Roles disponibles para edición
+const ROLES = ["administrador", "cliente"]; 
 
 const AdminUserEdit = () => {
     const navigate = useNavigate();
-    // El ID en la URL es el correo, lo usamos para buscar al usuario
-    const { id: userEmail } = useParams(); 
+    const { id: userIdString } = useParams(); 
     
-    // Extraemos la función de actualizar del contexto
     const { showToast, usuarios, actualizarUsuarioBD } = useCart();
     
-    // Guardamos el ID numérico real una vez lo encontramos
+    const userId = parseInt(userIdString, 10);
+
     const [numericId, setNumericId] = useState(null);
 
+    // Estado inicial incluye los nuevos campos
     const [formData, setFormData] = useState({
-        run: '', // Visual
+        rut: '', 
         nombre: '',
         apellidos: '',
         correo: '',
-        fechaNacimiento: '', // Visual
+        fechaNacimiento: '', 
         tipoUsuario: '',
         region: '',
         comuna: '',
-        direccion: '', // Visual
+        direccion: '', 
     });
     
     const [errors, setErrors] = useState([]);
@@ -44,17 +45,17 @@ const AdminUserEdit = () => {
     // 1. Cargar datos del usuario
     useEffect(() => {
         // Esperar a que carguen los usuarios
-        if (usuarios.length === 0) return;
+        if (usuarios.length === 0 && loading) return;
 
-        const userToEdit = usuarios.find(u => u.correo === userEmail);
+        // Buscamos el usuario por su ID NUMÉRICO
+        const userToEdit = usuarios.find(u => u.id === userId);
 
         if (!userToEdit) {
-            showToast(`Usuario con correo ${userEmail} no encontrado.`);
+            showToast(`Usuario con ID ${userId} no encontrado.`);
             navigate('/admin/usuarios');
             return;
         }
 
-        // Guardamos el ID numérico para usarlo al guardar
         setNumericId(userToEdit.id);
 
         // Separar "Juan Perez" en Nombre y Apellido visualmente
@@ -64,7 +65,8 @@ const AdminUserEdit = () => {
         const apellidosVisual = partesNombre.slice(1).join(" ") || "";
 
         setFormData({
-            run: '', 
+            // CRÍTICO: Cargar los nuevos campos del Backend
+            rut: userToEdit.rut || '', 
             nombre: nombreVisual,
             apellidos: apellidosVisual,
             correo: userToEdit.correo || '',
@@ -72,10 +74,10 @@ const AdminUserEdit = () => {
             tipoUsuario: userToEdit.rol || 'cliente',
             region: userToEdit.region || '',
             comuna: userToEdit.comuna || '',
-            direccion: '', 
+            direccion: userToEdit.direccion || '', // CRÍTICO: Cargar dirección
         });
         setLoading(false);
-    }, [userEmail, navigate, showToast, usuarios]);
+    }, [userId, navigate, showToast, usuarios, loading]); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -91,6 +93,7 @@ const AdminUserEdit = () => {
         
         // Validaciones
         const formValidationErrors = [];
+        if (!formData.rut) formValidationErrors.push("El RUT es requerido."); // CRÍTICO: RUT obligatorio
         if (!formData.nombre) formValidationErrors.push("El Nombre es requerido.");
         if (!formData.apellidos) formValidationErrors.push("Los Apellidos son requeridos.");
         if (!formData.tipoUsuario) formValidationErrors.push("El Rol es requerido.");
@@ -103,12 +106,15 @@ const AdminUserEdit = () => {
 
         // Preparar objeto para Backend
         const usuarioActualizado = {
-            // Unimos de nuevo el nombre
             nombre: `${formData.nombre} ${formData.apellidos}`,
             region: formData.region,
             comuna: formData.comuna,
             rol: formData.tipoUsuario,
-            // Nota: Correo y Password no se actualizan aquí por seguridad/simplicidad
+            
+            // CRÍTICO: Nuevos campos
+            rut: formData.rut,
+            direccion: formData.direccion 
+            // Correo y Password no se actualizan aquí 
         };
 
         // Llamar al Contexto -> Backend
@@ -121,6 +127,7 @@ const AdminUserEdit = () => {
         }
     };
 
+    // Si la página se está cargando o no se encuentra el usuario, muestra el mensaje
     if (loading) {
         return <main className="main" style={{ padding: '50px', textAlign:'center' }}>Cargando datos del usuario...</main>;
     }
@@ -128,7 +135,7 @@ const AdminUserEdit = () => {
     return (
         <>
             <header className="header">
-                <h1>Editar Usuario: {formData.nombre}</h1>
+                <h1>Editar Usuario: {formData.nombre} {formData.apellidos}</h1>
             </header>
 
             <form id="formUsuarioEditar" className="formulario" onSubmit={handleSubmit}>
@@ -140,8 +147,8 @@ const AdminUserEdit = () => {
                     </div>
                 )}
 
-                <label>RUN (Solo visual):</label>
-                <input type="text" name="run" value={formData.run} onChange={handleChange} placeholder="No editable en Backend" />
+                <label>RUT *:</label>
+                <input type="text" name="rut" value={formData.rut} onChange={handleChange} required />
 
                 <label>Nombre:</label>
                 <input type="text" name="nombre" required maxLength="50" value={formData.nombre} onChange={handleChange} />
@@ -170,8 +177,8 @@ const AdminUserEdit = () => {
                         COMUNAS_POR_REGION[formData.region].map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
 
-                <label>Dirección (Solo visual):</label>
-                <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} placeholder="No editable en Backend" />
+                <label>Dirección:</label>
+                <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} placeholder="Calle, número..." />
 
                 <button type="submit" className="btn">Actualizar Datos</button>
             </form>

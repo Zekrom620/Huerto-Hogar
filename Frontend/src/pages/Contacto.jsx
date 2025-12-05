@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext'; 
+// CRÍTICO: Importamos el nuevo servicio de contacto
+import { submitContactFormAPI } from '../services/ContactService';
 
 const Contacto = () => {
     const { showToast } = useCart();
@@ -20,8 +22,8 @@ const Contacto = () => {
         setFormData(prev => ({ ...prev, [id]: value }));
     };
 
-    // 3. Función de Validación y Envío (Migración de setupContacto)
-    const handleSubmit = (e) => {
+    // 3. Función de Validación y Envío (Ahora real)
+    const handleSubmit = async (e) => { 
         e.preventDefault();
         const newErrors = [];
 
@@ -32,8 +34,9 @@ const Contacto = () => {
         if (!nombre.trim()) newErrors.push('Nombre requerido.');
         else if (nombre.length > 100) newErrors.push('Nombre máximo 100 caracteres.');
 
-        if (correoL && correoL.length > 100) newErrors.push('Correo máximo 100 caracteres.');
-        else if (correoL && !/^[\w.-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/.test(correoL)) 
+        if (!correoL) newErrors.push('Correo requerido.');
+        else if (correoL.length > 100) newErrors.push('Correo máximo 100 caracteres.');
+        else if (!/^[\w.-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/.test(correoL)) 
             newErrors.push('Correo inválido (dominios permitidos).');
 
         if (!mensaje.trim()) newErrors.push('Comentario requerido.');
@@ -42,12 +45,26 @@ const Contacto = () => {
         setErrors(newErrors);
 
         if (newErrors.length === 0) {
-            // Si la validación pasa: Simular envío y mostrar toast
-            console.log('Mensaje de contacto enviado:', formData);
-            showToast('Gracias por contactarnos. Tu mensaje fue enviado.'); // Llama al toast
+            // Si la validación pasa: Enviar a la API
+            try {
+                const dataToSend = {
+                    nombre: nombre,
+                    correo: correoL,
+                    asunto: "Consulta General", // Asunto por defecto
+                    mensaje: mensaje
+                };
+                
+                // CORRECCIÓN ESLINT: No asignamos a 'response', solo llamamos a la función
+                await submitContactFormAPI(dataToSend);
+                
+                showToast('Gracias por contactarnos. Tu mensaje fue enviado y guardado.'); // Llama al toast
 
-            // 4. Limpiar el formulario
-            setFormData({ nombre: '', correo: '', mensaje: '' }); 
+                // 4. Limpiar el formulario
+                setFormData({ nombre: '', correo: '', mensaje: '' }); 
+            } catch (error) {
+                showToast('Error de conexión. El mensaje no se pudo guardar.');
+                console.error("Fallo al guardar contacto:", error);
+            }
         }
     };
 

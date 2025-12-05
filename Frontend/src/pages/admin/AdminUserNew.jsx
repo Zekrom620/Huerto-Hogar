@@ -20,14 +20,13 @@ const COMUNAS_POR_REGION = {
 
 const AdminUserNew = () => {
     const navigate = useNavigate();
-    // Extraemos registerUser (que conecta con el Backend) y datos de sesión
     const { showToast, usuarioActivo, registerUser } = useCart();
     
     const userRole = usuarioActivo?.rol; 
     
-    // Estado del formulario
+    // Estado del formulario (renombramos run -> rut)
     const [formData, setFormData] = useState({
-        run: '', // Visual (No se guarda en este Backend simplificado)
+        rut: '', // Ya no es solo visual, es campo de BD
         nombre: '',
         apellidos: '',
         correo: '',
@@ -35,7 +34,7 @@ const AdminUserNew = () => {
         tipoUsuario: '',
         region: '',
         comuna: '',
-        direccion: '', // Visual
+        direccion: '', // Ya no es solo visual, es campo de BD
         password: 'password_defecto_123' 
     });
 
@@ -56,6 +55,7 @@ const AdminUserNew = () => {
         
         // 1. Validaciones Básicas del Frontend
         const formValidationErrors = [];
+        if (!formData.rut) formValidationErrors.push("El RUT es requerido."); // CRÍTICO: RUT obligatorio
         if (!formData.nombre) formValidationErrors.push("El Nombre es requerido.");
         if (!formData.apellidos) formValidationErrors.push("Los Apellidos son requeridos.");
         if (!formData.correo) formValidationErrors.push("El Correo es requerido.");
@@ -68,20 +68,22 @@ const AdminUserNew = () => {
         }
 
         // 2. Preparar datos para el Backend (User.java)
-        // Adaptamos los campos para que coincidan con lo que Java espera
         const nuevoUsuario = {
-            // Unimos nombre y apellido porque en BD es un solo campo "nombre"
             nombre: `${formData.nombre} ${formData.apellidos}`,
             correo: formData.correo.trim().toLowerCase(),
             contrasena: formData.password,
             region: formData.region,
             comuna: formData.comuna,
-            rol: formData.tipoUsuario
+            rol: formData.tipoUsuario,
+            
+            // CRÍTICO: Nuevos campos
+            rut: formData.rut, 
+            direccion: formData.direccion // Campo opcional
         };
 
         // 3. Guardar en Base de Datos (MySQL)
         try {
-            await registerUser(nuevoUsuario);
+            await registerUser(nuevoUsuario); 
             showToast(`Usuario ${nuevoUsuario.nombre} creado con éxito.`);
             
             // Redirigir a la lista de usuarios
@@ -97,7 +99,8 @@ const AdminUserNew = () => {
 
     // Lógica para deshabilitar roles según quien esté logueado
     const isRoleDisabled = (role) => {
-        if (role === 'administrador' && userRole !== 'administrador') return true;
+        // Solo el administrador logueado puede crear otros administradores
+        if (role === 'administrador' && userRole !== 'administrador') return true; 
         return false;
     };
 
@@ -116,8 +119,8 @@ const AdminUserNew = () => {
                     </div>
                 )}
 
-                <label>RUN (Solo visual):</label>
-                <input type="text" name="run" placeholder="Ej: 19011022-K" value={formData.run} onChange={handleChange} />
+                <label>RUT *:</label>
+                <input type="text" name="rut" placeholder="Ej: 19011022-K" required value={formData.rut} onChange={handleChange} />
 
                 <label>Nombre:</label>
                 <input type="text" name="nombre" required value={formData.nombre} onChange={handleChange} />
@@ -136,7 +139,6 @@ const AdminUserNew = () => {
                     <option value="">Seleccione...</option>
                     <option value="administrador" disabled={isRoleDisabled('administrador')}>Administrador</option>
                     <option value="cliente">Cliente</option>
-                    <option value="repartidor">Repartidor</option>
                 </select>
 
                 <label>Región:</label>
@@ -151,7 +153,7 @@ const AdminUserNew = () => {
                     {formData.region && COMUNAS_POR_REGION[formData.region].map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
 
-                <label>Dirección (Solo visual):</label>
+                <label>Dirección:</label>
                 <input type="text" name="direccion" placeholder="Calle, número..." value={formData.direccion} onChange={handleChange} />
 
                 <button type="submit" className="btn">Guardar Usuario</button>
